@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INWISE CRM - Vídeos Explicativos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://i.ibb.co/chm94qyh/background.jpg') no-repeat center center fixed; /* Background original */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+            position: relative;
+        }
+
+        .notebook {
+            width: 1100px;
+            max-width: 100%;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+            margin-bottom: 0;
+        }
+
+        .screen {
+            background: #111827;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            height: 85vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen-content {
+            background: #ffffff;
+            border-radius: 5px;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            cursor: url('https://cdn.custom-cursor.com/db/pointer/32/pointer_10473.png'), pointer;
+        }
+
+        .keyboard {
+            background: #d1d5db;
+            height: 60px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-top: -5px;
+        }
+
+        .keyboard-keys {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .keyboard-keys div {
+            background: #9ca3af;
+            height: 20px;
+            flex: 1;
+            border-radius: 3px;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #111827;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .keyboard-keys div:hover {
+            background: #6b7280;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .keyboard-keys div:active {
+            background: #4b5563;
+            transform: translateY(0);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header img.logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #1e3a8a;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            padding: 0 20px;
+        }
+
+        .robot {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 100px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 25%;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .sidebar ol {
+            list-style-position: inside;
+            color: #4b5563;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .sidebar li:hover {
+            background: #e5e7eb;
+        }
+
+        .sidebar li.active {
+            background: #60a5fa;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .videos {
+            width: 75%;
+        }
+
+        .video-item {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            scroll-margin-top: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .video-item p {
+            font-size: 16px;
+            color: #4b5563;
+            text-align: center;
+        }
+
+        .faq {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .faq h2 {
+            font-size: 28px;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .faq-item summary {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #1e3a8a;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .faq-item summary:hover {
+            color: #60a5fa;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            font-size: 20px;
+            margin-left: 10px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item details[open] summary::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            font-size: 14px;
+            color: #4b5563;
+            margin-top: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-item a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .faq-item a:hover {
+            color: #1e3a8a;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="notebook">
+        <div class="screen">
+            <div class="screen-content">
+                <div class="header">
+                    <img src="https://i.ibb.co/gb7hw0f3/logo.png" alt="INWISE CRM Logo" class="logo">
+                    <h1>Como seria para você se aquele robozinho que atende às vezes pelo WhatsApp pudesse agora trabalhar para você, tendo pleno conhecimento do seu negócio e respondendo TODOS seus clientes sem nenhum atraso?</h1>
+                    <img src="https://i.ibb.co/d07qmbgJ/robot.png" alt="Robô Amigável" class="robot">
+                </div>
+                <div class="content">
+                    <div class="sidebar">
+                        <h2>Funcionalidades</h2>
+                        <ol>
+                            <li onclick="scrollToVideo('video-1')">Autoatendimento</li>
+                            <li onclick="scrollToVideo('video-2')">Agendamento de mensagens</li>
+                            <li onclick="scrollToVideo('video-3')">Disparos em massa</li>
+                            <li onclick="scrollToVideo('video-4')">CRM Kanban</li>
+                            <li onclick="scrollToVideo('video-5')">Integração com Typebot</li>
+                            <li onclick="scrollToVideo('video-6')">Integração com Flowise IA</li>
+                            <li onclick="scrollToVideo('video-7')">Remarketing e FollowUp</li>
+                            <li onclick="scrollToVideo('video-8')">Interface simplificada</li>
+                            <li onclick="scrollToVideo('video-9')">Filtros por etiqueta e abas</li>
+                        </ol>
+                    </div>
+                    <div class="videos">
+                        <div class="video-item" id="video-1">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091369?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Introdução ao INWISE CRM</p>
+                        </div>
+                        <div class="video-item" id="video-2">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091359?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Configuração Inicial</p>
+                        </div>
+                        <div class="video-item" id="video-3">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091354?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Autoatendimento</p>
+                        </div>
+                        <div class="video-item" id="video-4">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091345?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Agendamento de Mensagens</p>
+                        </div>
+                        <div class="video-item" id="video-5">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091335?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Disparos em Massa</p>
+                        </div>
+                        <div class="video-item" id="video-6">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091331?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>CRM Kanban</p>
+                        </div>
+                        <div class="video-item" id="video-7">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091321?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Integrações com Typebot e Flowise</p>
+                        </div>
+                        <div class="video-item" id="video-8">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091311?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Remarketing e FollowUp</p>
+                        </div>
+                        <div class="video-item" id="video-9">
+                            <div class="video-container">
+                                <iframe src="https://player.vimeo.com/video/1073091302?title=0&byline=0&portrait=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Interface e Filtros</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq">
+                    <h2>Perguntas mais Frequentes</h2>
+                    <div class="faq-item">
+                        <details>
+                            <summary>Como funciona o INWISE CRM?</summary>
+                            <p>INWISE CRM é uma extensão do Chrome que você deve instalar no seu navegador chrome, a ferramenta adiciona funcionalidades extras ao seu whatsapp web atual, você não precisa logar seu whatsapp em nenhum web externo ao whatsapp, tudo acontece no seu navegador web chrome.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>E a segunda é acessando a nossa Área de Membros Exclusiva?</summary>
+                            <p>E a segunda é acessando a nossa Área de Membros Exclusiva que você receberá acesso ao comprar sua licença, lá tem vídeos curtos ensinando todas funcionalidades para você aplicar no seu negócio.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>Preciso contratar licença para fazer um teste?</summary>
+                            <p>Não é necessário contratar uma licença para usar o INWISE CRM, oferecemos uma versão gratuita que permitirá que você use alguns recursos sem precisar comprar uma licença.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>É seguro usar o INWISE CRM?</summary>
+                            <p>Sim. A ferramenta é publicada no repositório do google chrome, para estar lá as ferramentas devem passar por um rigoroso processo de auditoria e controle do código onde o google garante que a ferramenta não viole as políticas de privacidade e não infrinja a segurança do usuário.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>Vou ter suporte para tirar minhas dúvidas?</summary>
+                            <p>Sim, você pode entrar em contato com o suporte de segunda a sexta de 9h até às 18h ou sábado de 9h até 12h, que teremos um time disponível para tirar suas dúvidas.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>O INWISE CRM armazena minhas informações de contato?</summary>
+                            <p>O INWISE CRM não tem acesso às suas informações, a ferramenta funciona localmente no seu computador, na verdade o INWISE CRM não possui servidores de armazenamento, portanto não tem a capacidade de arquivar suas informações.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>Quais são as formas de pagamento?</summary>
+                            <p>Você pode contratar a licença do INWISE CRM através do cartão de crédito ou ZELLE.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>Como posso contatar o suporte?</summary>
+                            <p>Se você precisar entrar em contato conosco, envie-nos um e-mail para <a href="mailto:support@inwisepro.com">support@inwisepro.com</a> Ou chame no WhatsApp <a href="https://wa.me/15618498555" target="_blank">+1(561)849-8555</a></p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="keyboard">
+            <div class="keyboard-keys">
+                <div onclick="scrollToTop()" title="Home">ESC</div>
+                <div onclick="scrollToVideo('video-1')" title="Vídeo 1">F1</div>
+                <div onclick="scrollToVideo('video-2')" title="Vídeo 2">F2</div>
+                <div onclick="scrollToVideo('video-3')" title="Vídeo 3">F3</div>
+                <div onclick="scrollToVideo('video-4')" title="Vídeo 4">F4</div>
+                <div onclick="scrollToVideo('video-5')" title="Vídeo 5">F5</div>
+                <div onclick="scrollToVideo('video-6')" title="Vídeo 6">F6</div>
+                <div onclick="scrollToVideo('video-7')" title="Vídeo 7">F7</div>
+                <div onclick="scrollToVideo('video-8')" title="Vídeo 8">F8</div>
+                <div onclick="scrollToVideo('video-9')" title="Vídeo 9">F9</div>
+                <div onclick="scrollToFAQ()" title="FAQ">F10</div>
+                <div onclick="openWhatsApp()" title="WhatsApp">F11</div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/15618498555" target="_blank" class="whatsapp-btn">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        function scrollToVideo(videoId) {
+            const videoElement = document.getElementById(videoId);
+            videoElement.scrollIntoView({ behavior: 'smooth' });
+            
+            const sidebarItems = document.querySelectorAll('.sidebar li');
+            sidebarItems.forEach(item => item.classList.remove('active'));
+            const index = parseInt(videoId.split('-')[1]) - 1;
+            sidebarItems[index].classList.add('active');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToFAQ() {
+            const faqSection = document.querySelector('.faq');
+            faqSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openWhatsApp() {
+            window.open('https://wa.me/15618498555', '_blank');
+        }
+
+        const videos = document.querySelectorAll('.video-item');
+        const sidebarItems = document.querySelectorAll('.sidebar li');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const videoId = entry.target.id;
+                    const index = parseInt(videoId.split('-')[1]) - 1;
+                    sidebarItems.forEach(item => item.classList.remove('active'));
+                    if (index >= 0 && index < sidebarItems.length) {
+                        sidebarItems[index].classList.add('active');
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        videos.forEach(video => observer.observe(video));
+    </script>
+</body>
+</html>
